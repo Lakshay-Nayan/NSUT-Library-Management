@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Library Management{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>NSUT Library Management</h1>
+        <p>Book inventory and student borrowing portal</p>
+    </header>
+
+    <nav>
+        <a href="{{ url_for('index') }}">Dashboard</a>
+        <a href="{{ url_for('books') }}">Books</a>
+        <a href="{{ url_for('students') }}">Students</a>
+        <a href="{{ url_for('issue_book') }}">Issue Book</a>
+        <a href="{{ url_for('issued_books') }}">Issue Records</a>
+        <a href="{{ url_for('damages') }}">Damages</a>
+        <a href="{{ url_for('fines') }}">Fines</a>
+    </nav>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="message {{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>College Library Management System</footer>
+</body>
+</html>

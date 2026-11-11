@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Add Book{% endblock %}
+{% block content %}
+<h2>Add a New Book</h2>
+<form method="POST" class="form-box">
+    <label>Book Title</label><input name="title" required>
+    <label>Author</label><input name="author" required>
+    <label>ISBN (optional)</label><input name="isbn">
+    <label>Category</label><input name="category" placeholder="e.g. Computer Science">
+    <label>Number of Copies</label><input type="number" name="copies" min="1" value="1" required>
+    <label>Book Price (₹)</label><input type="number" name="price" min="0" step="0.01" value="0">
+    <button type="submit">Save Book</button>
+</form>
+{% endblock %}

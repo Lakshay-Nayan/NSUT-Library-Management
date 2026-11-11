@@ -1,0 +1,68 @@
+
+{% extends "base.html" %}
+
+{% block title %}Manage Inventory{% endblock %}
+
+{% block content %}
+
+<h2>Manage Inventory</h2>
+
+<a class="button" href="{{ url_for('add_book') }}">
+    Add New Book
+</a>
+
+<form method="GET" class="search-form">
+    <input
+        type="text"
+        name="q"
+        placeholder="Search by title, author or ISBN"
+        value="{{ search }}"
+    >
+    <button type="submit">Search</button>
+</form>
+
+<table>
+    <tr>
+        <th>S.No.</th>
+        <th>Book Title</th>
+        <th>Author</th>
+        <th>ISBN</th>
+        <th>Category</th>
+        <th>Total Copies</th>
+        <th>Available</th>
+        <th>Issued</th>
+        <th>Status</th>
+    </tr>
+
+    {% for book in books %}
+
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.isbn or "-" }}</td>
+        <td>{{ book.category or "-" }}</td>
+        <td>{{ book.total_copies }}</td>
+        <td>{{ book.available_copies }}</td>
+        <td>{{ book.issued_copies }}</td>
+
+        <td>
+            {% if book.available_copies == 0 %}
+                <span class="issued-status">All Issued</span>
+            {% else %}
+                <span class="available-status">Available</span>
+            {% endif %}
+        </td>
+    </tr>
+
+    {% else %}
+
+    <tr>
+        <td colspan="9">No books found.</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

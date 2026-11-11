@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Damage Records{% endblock %}
+{% block content %}
+<h2>Damage Records</h2>
+<table>
+    <tr><th>ID</th><th>Book</th><th>Student</th><th>Roll Number</th><th>Description</th><th>Charge</th><th>Recorded</th></tr>
+    {% for item in damages %}
+    <tr>
+        <td>{{ item.id }}</td><td>{{ item.title }}</td><td>{{ item.name }}</td>
+        <td>{{ item.roll_no }}</td><td>{{ item.description }}</td>
+        <td>₹{{ item.charge }}</td><td>{{ item.recorded_at }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="7">No damage records yet.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

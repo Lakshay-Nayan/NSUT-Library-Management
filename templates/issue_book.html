@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Issue Book{% endblock %}
+{% block content %}
+<h2>Issue a Book</h2>
+<p>Standard loan period: {{ loan_days }} days. Maximum active books per student: {{ max_books }}.</p>
+<form method="POST" class="form-box">
+    <label>Select Student</label>
+    <select name="student_id" required>
+        <option value="">Choose a student</option>
+        {% for student in students %}
+        <option value="{{ student.id }}">{{ student.roll_no }} - {{ student.name }}</option>
+        {% endfor %}
+    </select>
+    <label>Select Available Book</label>
+    <select name="book_id" required>
+        <option value="">Choose a book</option>
+        {% for book in books %}
+        <option value="{{ book.id }}">{{ book.title }} ({{ book.available_copies }} available)</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Confirm Issue</button>
+</form>
+{% endblock %}

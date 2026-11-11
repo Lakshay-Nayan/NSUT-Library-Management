@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Return Book{% endblock %}
+{% block content %}
+<h2>Return Book</h2>
+<div class="info-box">
+    <p><strong>Book:</strong> {{ issue.title }}</p>
+    <p><strong>Student:</strong> {{ issue.name }} ({{ issue.roll_no }})</p>
+    <p><strong>Due date:</strong> {{ issue.due_date }}</p>
+    <p><strong>Overdue days as of today:</strong> {{ overdue_days }}</p>
+    <p><strong>Late charge:</strong> ₹{{ late_charge }} (₹5 per overdue day)</p>
+</div>
+<form method="POST" class="form-box">
+    <label>Damage description (leave blank if no damage)</label>
+    <textarea name="damage_description" rows="3"></textarea>
+    <label>Damage charge (₹)</label>
+    <input type="number" name="damage_charge" min="0" step="0.01" value="0">
+    <button type="submit">Confirm Return</button>
+</form>
+{% endblock %}

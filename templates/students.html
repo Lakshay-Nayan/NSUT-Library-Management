@@ -1,0 +1,51 @@
+
+{% extends "base.html" %}
+
+{% block title %}Students{% endblock %}
+
+{% block content %}
+
+<h2>Registered Students</h2>
+
+<a class="button" href="{{ url_for('register_student') }}">
+    Register Student
+</a>
+
+<form method="GET" class="search-form">
+    <input
+        type="text"
+        name="q"
+        placeholder="Search name or roll number"
+        value="{{ search }}"
+    >
+    <button type="submit">Search</button>
+</form>
+
+<table>
+    <tr>
+        <th>S.No.</th>
+        <th>Roll Number</th>
+        <th>Name</th>
+        <th>Study Year</th>
+        <th>Email</th>
+        <th>Phone</th>
+    </tr>
+
+    {% for student in students %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ student.roll_no }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.study_year }}</td>
+        <td>{{ student.email or "-" }}</td>
+        <td>{{ student.phone or "-" }}</td>
+    </tr>
+
+    {% else %}
+    <tr>
+        <td colspan="5">No students registered.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Issue Records{% endblock %}
+{% block content %}
+<h2>Book Issue Records</h2>
+<table>
+    <tr><th>ID</th><th>Book</th><th>Student</th><th>Roll Number</th><th>Issued</th><th>Due</th><th>Overdue Days</th><th>Status</th><th>Action</th></tr>
+    {% for item in issues %}
+    <tr>
+        <td>{{ item.id }}</td><td>{{ item.title }}</td><td>{{ item.name }}</td>
+        <td>{{ item.roll_no }}</td><td>{{ item.issue_date }}</td><td>{{ item.due_date }}</td>
+        <td>{{ item.overdue_days }}</td><td>{{ item.status }}</td>
+        <td>
+            {% if item.status == 'Issued' %}
+            <a href="{{ url_for('return_book', issue_id=item.id) }}">Return</a>
+            {% else %}-{% endif %}
+        </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="9">No issue records yet.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}
