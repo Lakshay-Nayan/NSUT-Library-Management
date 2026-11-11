@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Dashboard</h2>
+<div class="cards">
+    <div class="card">
+
+        <div class="card-heading">
+            <div class="card-icon blue">📚</div>
+            <h3>Book Titles</h3>
+        </div>
+        <p>{{ stats.book_titles }}</p>
+
+    </div>
+    <div class="card">
+
+        <div class="card-heading">
+            <div class="card-icon green">📖</div>
+            <h3>Total Copies</h3>
+        </div>
+        <p>{{ stats.total_copies }}</p>
+
+    </div>
+    <div class="card">
+
+        <div class="card-heading">
+            <div class="card-icon purple">✓</div>
+            <h3>Available Copies</h3>
+        </div>
+        <p>{{ stats.available_copies }}</p>
+
+    </div>
+    <div class="card">
+
+        <div class="card-heading">
+            <div class="card-icon orange">👥</div>
+            <h3>Students</h3>
+        </div>
+        <p>{{ stats.students }}</p>
+
+    </div>
+    <div class="card">
+
+        <div class="card-heading">
+            <div class="card-icon cyan">📤</div>
+            <h3>Currently Issued</h3>
+        </div>
+        <p>{{ stats.issued }}</p>
+
+    </div>
+    <div class="card">
+
+        <div class="card-heading">
+            <div class="card-icon red">⚠</div>
+            <h3>Overdue</h3>
+        </div>
+        <p>{{ stats.overdue }}</p>
+
+    </div>
+</div>
+
+
+<div class="actions">
+    <a class="button" href="{{ url_for('add_book') }}">Add a Book</a>
+    <a class="button" href="{{ url_for('register_student') }}">Register Student</a>
+    <a class="button" href="{{ url_for('issue_book') }}">Issue a Book</a>
+</div>
+
+<h2>Recent Transactions</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Book</th>
+        <th>Student</th>
+        <th>Roll Number</th>
+        <th>Issue Date</th>
+        <th>Due Date</th>
+        <th>Status</th>
+    </tr>
+    {% for item in recent %}
+    <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.title }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.roll_no }}</td>
+        <td>{{ item.issue_date }}</td>
+        <td>{{ item.due_date }}</td>
+        <td>{{ item.status }}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="7">No transactions yet.</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
