@@ -1,37 +1,21 @@
 
 import mysql.connector
+import os
 
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": ""
+    "host": os.environ.get("DB_HOST", "localhost"),
+    "user": os.environ.get("DB_USER", "root"),
+    "password": os.environ.get("DB_PASSWORD", ""),
+    "port": int(os.environ.get("DB_PORT", "3306")),
+    "database": os.environ.get("DB_NAME", "LIBRARY")
 }
-
-DATABASE_NAME = "LIBRARY"
 
 
 def get_connection():
-    return mysql.connector.connect(
-        **DB_CONFIG,
-        database=DATABASE_NAME
-    )
+    return mysql.connector.connect(**DB_CONFIG)
 
 
 def initialize_database():
-
-    # Connect to MySQL server first
-    connection = mysql.connector.connect(**DB_CONFIG)
-    cursor = connection.cursor()
-
-    # Create database if it doesn't exist
-    cursor.execute(
-        f"CREATE DATABASE IF NOT EXISTS {DATABASE_NAME}"
-    )
-
-    cursor.close()
-    connection.close()
-
-    # Connect to the newly created database
     connection = get_connection()
     cursor = connection.cursor()
 
